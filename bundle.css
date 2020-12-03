@@ -1,0 +1,66 @@
+
+  
+  
+ .app-wrapper {
+    display:grid;
+  
+    grid-template-areas: 
+    "h h"
+    "n c";
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr 10fr;
+    /*grid-gap: 10px;*/
+    }
+    .header {
+    grid-area:h;
+    background-color:#DA70D6;
+    }
+    .header img {
+    width:60px;
+    }.nav {
+    grid-area:n;
+    background-color: #6A5ACD;
+    }
+.item {
+    color: white;
+    line-height: 30px;
+}
+.active {
+    color: yellow;
+}
+
+a {
+    color:white;
+}.content {
+    grid-area:c;
+    background-color:cornflowerblue;
+    }
+    .content img.fond {
+      width: 100%;
+      height: 300px;
+    }
+    .user img {
+        width: 80px;
+        height: 80px;
+    }.post img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}.dialogs {
+display: grid;
+grid-template-columns: 2fr 10fr;
+}
+
+.dialogs_items  {
+padding: 10px;
+}
+.dialog .active{
+color:gold;
+}
+.messages {
+padding: 10px;
+}
+.message {
+
+}
+/*# sourceMappingURL=bundle.css.map*/
