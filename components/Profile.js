@@ -5,15 +5,15 @@ import MyPosts from './MyPosts';
 import {events} from './events';
 import ProfileInfo from './ProfileInfo';
 class Profile extends React.PureComponent {
-   
+   static propTypes={
+      postData:PropTypes.array
+   }
        render(){
-      
+    
           return(   <div >
          <ProfileInfo />
-           <MyPosts />
-           <div></div>
-           <div></div>
-           <div></div>
+           <MyPosts postData={this.props.postData}/>
+           
           </div>)
         
        }

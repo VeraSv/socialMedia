@@ -10,6 +10,10 @@ import Dialogs from './Dialogs';
 
 
 class Page extends React.PureComponent {
+  static propTypes={
+    info:PropTypes.object
+
+  }
   render (){
     return (
       <BrowserRouter>
@@ -17,8 +21,8 @@ class Page extends React.PureComponent {
         <Header />
         <Navbar/>
         <div className='content'>
-          <Route path='/' exact component={Profile}/>
-          <Route path='/dialogs' component={Dialogs}/>
+          <Route path='/' exact component={()=><Profile postData={this.props.info.postData}/>}/>
+          <Route path='/dialogs' component={()=> <Dialogs userData={this.props.info.userData} messagesData={this.props.info.messagesData}/>}/>
           
         </div>
        

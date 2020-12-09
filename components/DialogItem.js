@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-//import  './Dialogs.css'
+import  './Dialogs.css'
 //import {events} from './events';
 
 import {NavLink} from 'react-router-dom';

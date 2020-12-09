@@ -5,17 +5,22 @@ import  './MyPosts.css'
 import Post from './Post';
 
 class MyPosts extends React.PureComponent {
+ static propsTypes={
+    postData:PropTypes.array
+  }
   render (){
+    var post=this.props.postData.map(i=><Post key={i.id} message={i.message} likesCount={i.likesCount} />)
     return (
-      <div >
+      <div className='myPost'>
        Post
        <div>
            <textarea></textarea>
+           <div>
            <button>Add post</button>
+             </div>
 
         </div>
-        <Post message='Hi!'  likesCount='5'/> 
-        <Post message='How are you?' likesCount='0'/> 
+        {post}
       </div>);
 }
 }

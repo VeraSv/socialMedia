@@ -6,6 +6,9 @@ grid-template-columns: 2fr 10fr;
 .dialogs_items  {
 padding: 10px;
 }
+.dialog {
+    line-height: 20px;
+}
 .dialog .active{
 color:gold;
 }

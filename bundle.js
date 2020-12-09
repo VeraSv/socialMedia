@@ -6957,22 +6957,28 @@ var MyPosts = function (_React$PureComponent) {
   _createClass(MyPosts, [{
     key: 'render',
     value: function render() {
+      var post = this.props.postData.map(function (i) {
+        return _react2.default.createElement(_Post2.default, { key: i.id, message: i.message, likesCount: i.likesCount });
+      });
       return _react2.default.createElement(
         'div',
-        null,
+        { className: 'myPost' },
         'Post',
         _react2.default.createElement(
           'div',
           null,
           _react2.default.createElement('textarea', null),
           _react2.default.createElement(
-            'button',
+            'div',
             null,
-            'Add post'
+            _react2.default.createElement(
+              'button',
+              null,
+              'Add post'
+            )
           )
         ),
-        _react2.default.createElement(_Post2.default, { message: 'Hi!', likesCount: '5' }),
-        _react2.default.createElement(_Post2.default, { message: 'How are you?', likesCount: '0' })
+        post
       );
     }
   }]);
@@ -6980,6 +6986,9 @@ var MyPosts = function (_React$PureComponent) {
   return MyPosts;
 }(_react2.default.PureComponent);
 
+MyPosts.propsTypes = {
+  postData: _propTypes2.default.array
+};
 exports.default = MyPosts;
 
 /***/ }),
@@ -12326,7 +12335,9 @@ var _Page2 = _interopRequireDefault(_Page);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom2.default.render(_react2.default.createElement(_Page2.default, null), document.getElementById('container'));
+var info = __webpack_require__(403);
+//info=JSON.parse(info);
+_reactDom2.default.render(_react2.default.createElement(_Page2.default, { info: info }), document.getElementById('container'));
 
 /***/ }),
 /* 359 */
@@ -29629,6 +29640,8 @@ var Page = function (_React$PureComponent) {
   _createClass(Page, [{
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         _reactRouterDom.BrowserRouter,
         null,
@@ -29640,8 +29653,12 @@ var Page = function (_React$PureComponent) {
           _react2.default.createElement(
             'div',
             { className: 'content' },
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/', exact: true, component: _Profile2.default }),
-            _react2.default.createElement(_reactRouterDom.Route, { path: '/dialogs', component: _Dialogs2.default })
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/', exact: true, component: function component() {
+                return _react2.default.createElement(_Profile2.default, { postData: _this2.props.info.postData });
+              } }),
+            _react2.default.createElement(_reactRouterDom.Route, { path: '/dialogs', component: function component() {
+                return _react2.default.createElement(_Dialogs2.default, { userData: _this2.props.info.userData, messagesData: _this2.props.info.messagesData });
+              } })
           )
         )
       );
@@ -29651,6 +29668,10 @@ var Page = function (_React$PureComponent) {
   return Page;
 }(_react2.default.PureComponent);
 
+Page.propTypes = {
+  info: _propTypes2.default.object
+
+};
 exports.default = Page;
 
 /***/ }),
@@ -33455,7 +33476,7 @@ function isUndefined(arg) {
 
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+   value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -33489,33 +33510,33 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Profile = function (_React$PureComponent) {
-  _inherits(Profile, _React$PureComponent);
+   _inherits(Profile, _React$PureComponent);
 
-  function Profile() {
-    _classCallCheck(this, Profile);
+   function Profile() {
+      _classCallCheck(this, Profile);
 
-    return _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).apply(this, arguments));
-  }
+      return _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).apply(this, arguments));
+   }
 
-  _createClass(Profile, [{
-    key: 'render',
-    value: function render() {
+   _createClass(Profile, [{
+      key: 'render',
+      value: function render() {
 
-      return _react2.default.createElement(
-        'div',
-        null,
-        _react2.default.createElement(_ProfileInfo2.default, null),
-        _react2.default.createElement(_MyPosts2.default, null),
-        _react2.default.createElement('div', null),
-        _react2.default.createElement('div', null),
-        _react2.default.createElement('div', null)
-      );
-    }
-  }]);
+         return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(_ProfileInfo2.default, null),
+            _react2.default.createElement(_MyPosts2.default, { postData: this.props.postData })
+         );
+      }
+   }]);
 
-  return Profile;
+   return Profile;
 }(_react2.default.PureComponent);
 
+Profile.propTypes = {
+   postData: _propTypes2.default.array
+};
 exports.default = Profile;
 
 /***/ }),
@@ -33718,26 +33739,23 @@ var Dialogs = function (_React$PureComponent) {
   _inherits(Dialogs, _React$PureComponent);
 
   function Dialogs() {
-    var _ref;
-
-    var _temp, _this, _ret;
-
     _classCallCheck(this, Dialogs);
 
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Dialogs.__proto__ || Object.getPrototypeOf(Dialogs)).call.apply(_ref, [this].concat(args))), _this), _this.userData = [{ id: 1, name: 'Slava' }, { id: 2, name: 'Anna' }, { id: 3, name: 'Vasja' }, { id: 4, name: 'Sasha' }], _this.massagesData = [{ id: 1, massage: 'Hi' }, { id: 2, massage: 'How are you' }, { id: 3, massage: 'Have a good day!' }], _temp), _possibleConstructorReturn(_this, _ret);
+    return _possibleConstructorReturn(this, (Dialogs.__proto__ || Object.getPrototypeOf(Dialogs)).apply(this, arguments));
   }
 
   _createClass(Dialogs, [{
     key: 'render',
+
+    /*userData= [
+      {id:1, name:'Slava'}, {id:2, name:'Anna'}, {id:3, name:'Vasja'},{id:4, name:'Sasha'}
+    ];*/
+    /*messagesData=[{id:1, message:'Hi'},{id:2, message:'How are you'},{id:3, message:'Have a good day!'}]*/
     value: function render() {
-      var user = this.userData.map(function (i) {
+      var user = this.props.userData.map(function (i) {
         return _react2.default.createElement(_DialogItem2.default, { key: i.id, id: i.id, name: i.name });
       });
-      var message = this.massagesData.map(function (i) {
+      var message = this.props.messagesData.map(function (i) {
         return _react2.default.createElement(_Message2.default, { key: i.id, id: i.id, message: i.message });
       });
       return _react2.default.createElement(
@@ -33760,6 +33778,9 @@ var Dialogs = function (_React$PureComponent) {
   return Dialogs;
 }(_react2.default.PureComponent);
 
+Dialogs.propTypes = {
+  userData: _propTypes2.default.array,
+  messagesData: _propTypes2.default.array };
 exports.default = Dialogs;
 
 /***/ }),
@@ -33783,6 +33804,8 @@ var _propTypes = __webpack_require__(23);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+__webpack_require__(154);
+
 var _reactRouterDom = __webpack_require__(102);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -33792,7 +33815,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-//import  './Dialogs.css'
 //import {events} from './events';
 
 var DialogItem = function (_React$PureComponent) {
@@ -33849,8 +33871,6 @@ var _propTypes = __webpack_require__(23);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-__webpack_require__(154);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33859,6 +33879,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+//import  './Dialogs.css'
 //import {events} from './events';
 
 
@@ -33885,7 +33906,17 @@ var Message = function (_React$PureComponent) {
   return Message;
 }(_react2.default.PureComponent);
 
+Message.propTypes = {
+  id: _propTypes2.default.number,
+  message: _propTypes2.default.string
+};
 exports.default = Message;
+
+/***/ }),
+/* 403 */
+/***/ (function(module, exports) {
+
+module.exports = {"userData":[{"id":1,"name":"Slava"},{"id":2,"name":"Anna"},{"id":3,"name":"Vasja"},{"id":4,"name":"Sasha"}],"messagesData":[{"id":1,"message":"Hi"},{"id":2,"message":"How are you"},{"id":3,"message":"Have a good day!"}],"postData":[{"id":1,"message":"Hi!","likesCount":"5"},{"id":2,"message":"How are you?","likesCount":"0"}]}
 
 /***/ })
 /******/ ]);
