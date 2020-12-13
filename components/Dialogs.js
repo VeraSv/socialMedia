@@ -16,7 +16,7 @@ class Dialogs extends React.PureComponent {
 /*messagesData=[{id:1, message:'Hi'},{id:2, message:'How are you'},{id:3, message:'Have a good day!'}]*/
   render (){
   var user=this.props.userData.map(i=>{return <DialogItem key={i.id} id={i.id} name={i.name} />})
-  var message=this.props.messagesData.map(i=>{return <Message key={i.id} id={i.id} message={i.message} />});
+  var message=this.props.messagesData.map(i=>{return <Message key={i.id} id={i.id} message={i.message} img={i.img}/>});
     return (
     <div className='dialogs'>
       <div className='dialogs_items'>

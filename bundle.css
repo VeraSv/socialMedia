@@ -31,6 +31,11 @@
 
 a {
     color:white;
+}
+.friend img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
 }.content {
     grid-area:c;
     background-color:cornflowerblue;
@@ -69,5 +74,12 @@ padding: 10px;
 }
 .message {
 
+}.message img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+div.message:nth-child(even) {
+    margin-left: 100px;
 }
 /*# sourceMappingURL=bundle.css.map*/

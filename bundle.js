@@ -12335,7 +12335,7 @@ var _Page2 = _interopRequireDefault(_Page);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var info = __webpack_require__(403);
+var info = __webpack_require__(404);
 //info=JSON.parse(info);
 _reactDom2.default.render(_react2.default.createElement(_Page2.default, { info: info }), document.getElementById('container'));
 
@@ -33144,6 +33144,28 @@ var Navbar = function (_React$PureComponent) {
             { to: '/settings', activeClassName: 'active' },
             'Settings'
           )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'friends' },
+          _react2.default.createElement(
+            'div',
+            { className: 'friend' },
+            _react2.default.createElement('img', { src: 'https://c7.hotpng.com/preview/596/915/779/computer-icons-potter-dix-elementary-school-male-others.jpg' }),
+            'Slava'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'friend' },
+            _react2.default.createElement('img', { src: 'https://www.pikpng.com/pngl/b/417-4172348_testimonial-user-icon-color-clipart.png' }),
+            'Petya'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'friend' },
+            _react2.default.createElement('img', { src: 'https://img2.freepng.ru/20180409/qiw/kisspng-computer-icons-user-profile-man-icon-5acb93284c3aa4.6118851515232909203123.jpg' }),
+            'Ivan'
+          )
         )
       );
     }
@@ -33756,7 +33778,7 @@ var Dialogs = function (_React$PureComponent) {
         return _react2.default.createElement(_DialogItem2.default, { key: i.id, id: i.id, name: i.name });
       });
       var message = this.props.messagesData.map(function (i) {
-        return _react2.default.createElement(_Message2.default, { key: i.id, id: i.id, message: i.message });
+        return _react2.default.createElement(_Message2.default, { key: i.id, id: i.id, message: i.message, img: i.img });
       });
       return _react2.default.createElement(
         'div',
@@ -33871,6 +33893,8 @@ var _propTypes = __webpack_require__(23);
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
+__webpack_require__(403);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -33879,7 +33903,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//import  './Dialogs.css'
 //import {events} from './events';
 
 
@@ -33898,6 +33921,7 @@ var Message = function (_React$PureComponent) {
       return _react2.default.createElement(
         'div',
         { className: 'message' },
+        _react2.default.createElement('img', { src: this.props.img }),
         this.props.message
       );
     }
@@ -33908,7 +33932,8 @@ var Message = function (_React$PureComponent) {
 
 Message.propTypes = {
   id: _propTypes2.default.number,
-  message: _propTypes2.default.string
+  message: _propTypes2.default.string,
+  img: _propTypes2.default.string
 };
 exports.default = Message;
 
@@ -33916,7 +33941,13 @@ exports.default = Message;
 /* 403 */
 /***/ (function(module, exports) {
 
-module.exports = {"userData":[{"id":1,"name":"Slava"},{"id":2,"name":"Anna"},{"id":3,"name":"Vasja"},{"id":4,"name":"Sasha"}],"messagesData":[{"id":1,"message":"Hi"},{"id":2,"message":"How are you"},{"id":3,"message":"Have a good day!"}],"postData":[{"id":1,"message":"Hi!","likesCount":"5"},{"id":2,"message":"How are you?","likesCount":"0"}]}
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 404 */
+/***/ (function(module, exports) {
+
+module.exports = {"userData":[{"id":1,"name":"Slava"},{"id":2,"name":"Anna"},{"id":3,"name":"Vasja"},{"id":4,"name":"Sasha"}],"messagesData":[{"id":1,"message":"Hi","img":"https://im0-tub-by.yandex.net/i?id=30da958c5d9a143ab70b2cbe9bb464d0&n=13"},{"id":2,"message":"How are you","img":"https://creazilla-store.fra1.digitaloceanspaces.com/emojis/50234/man-office-worker-emoji-clipart-md.png"},{"id":3,"message":"Have a good day!","img":"https://im0-tub-by.yandex.net/i?id=30da958c5d9a143ab70b2cbe9bb464d0&n=13"}],"postData":[{"id":1,"message":"Hi!","likesCount":"5"},{"id":2,"message":"How are you?","likesCount":"0"}]}
 
 /***/ })
 /******/ ]);
