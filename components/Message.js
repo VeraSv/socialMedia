@@ -15,7 +15,7 @@ class Message extends React.PureComponent {
     
            <div className='message'>
              <img src={this.props.img} />
-            {this.props.message}
+            <span>{this.props.message}</span>
            </div>);
 }
 }

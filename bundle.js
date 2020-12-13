@@ -33152,19 +33152,31 @@ var Navbar = function (_React$PureComponent) {
             'div',
             { className: 'friend' },
             _react2.default.createElement('img', { src: 'https://c7.hotpng.com/preview/596/915/779/computer-icons-potter-dix-elementary-school-male-others.jpg' }),
-            'Slava'
+            _react2.default.createElement(
+              'span',
+              null,
+              'Slava'
+            )
           ),
           _react2.default.createElement(
             'div',
             { className: 'friend' },
             _react2.default.createElement('img', { src: 'https://www.pikpng.com/pngl/b/417-4172348_testimonial-user-icon-color-clipart.png' }),
-            'Petya'
+            _react2.default.createElement(
+              'span',
+              null,
+              'Petya'
+            )
           ),
           _react2.default.createElement(
             'div',
             { className: 'friend' },
             _react2.default.createElement('img', { src: 'https://img2.freepng.ru/20180409/qiw/kisspng-computer-icons-user-profile-man-icon-5acb93284c3aa4.6118851515232909203123.jpg' }),
-            'Ivan'
+            _react2.default.createElement(
+              'span',
+              null,
+              'Ivan'
+            )
           )
         )
       );
@@ -33922,7 +33934,11 @@ var Message = function (_React$PureComponent) {
         'div',
         { className: 'message' },
         _react2.default.createElement('img', { src: this.props.img }),
-        this.props.message
+        _react2.default.createElement(
+          'span',
+          null,
+          this.props.message
+        )
       );
     }
   }]);

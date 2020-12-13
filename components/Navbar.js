@@ -28,15 +28,15 @@ class Navbar extends React.PureComponent{
           <div className='friends'>
             <div className='friend'>
               <img src='https://c7.hotpng.com/preview/596/915/779/computer-icons-potter-dix-elementary-school-male-others.jpg'/>
-              Slava
+              <span>Slava</span>
               </div>
               <div className='friend'>
               <img src='https://www.pikpng.com/pngl/b/417-4172348_testimonial-user-icon-color-clipart.png'/>
-              Petya
+              <span>Petya</span>
               </div>
               <div className='friend'>
               <img src='https://img2.freepng.ru/20180409/qiw/kisspng-computer-icons-user-profile-man-icon-5acb93284c3aa4.6118851515232909203123.jpg'/>
-              Ivan
+              <span>Ivan</span>
               </div>
               </div> 
         </nav>

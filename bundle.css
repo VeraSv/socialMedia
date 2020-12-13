@@ -32,10 +32,20 @@
 a {
     color:white;
 }
+.friend {
+    display: inline-block;
+    margin-right: 10px;
+}
+.friend span {
+    display: block;
+}
 .friend img {
     width: 30px;
     height: 30px;
     border-radius: 50%;
+}
+.friends {
+    margin-top: 30px;
 }.content {
     grid-area:c;
     background-color:cornflowerblue;
@@ -74,12 +84,24 @@ padding: 10px;
 }
 .message {
 
-}.message img {
+}.message {
+    width: 150px;
+}
+.message span {
+    padding-bottom: 10px;
+}
+.message img {
     width: 30px;
     height: 30px;
     border-radius: 50%;
+    margin-left:10px;
+     margin-right: 10px;
 }
 div.message:nth-child(even) {
-    margin-left: 100px;
+    margin-left: 150px;
+}
+
+div.message:nth-child(even) img {
+    float:right
 }
 /*# sourceMappingURL=bundle.css.map*/

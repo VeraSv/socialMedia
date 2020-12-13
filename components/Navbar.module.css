@@ -13,8 +13,18 @@
 a {
     color:white;
 }
+.friend {
+    display: inline-block;
+    margin-right: 10px;
+}
+.friend span {
+    display: block;
+}
 .friend img {
     width: 30px;
     height: 30px;
     border-radius: 50%;
+}
+.friends {
+    margin-top: 30px;
 }
