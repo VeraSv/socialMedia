@@ -8,15 +8,26 @@ class MyPosts extends React.PureComponent {
  static propsTypes={
     postData:PropTypes.array
   }
+  newText=null;
+  addMes=(ref)=>{
+this.newText=ref;
+  }
+changeText=()=>{
+  
+}
+addText=()=>{
+  alert(this.newText.value)
+}
+
   render (){
     var post=this.props.postData.map(i=><Post key={i.id} message={i.message} likesCount={i.likesCount} />)
     return (
       <div className='myPost'>
        Post
        <div>
-           <textarea></textarea>
+           <textarea defaultValue='' onChange={this.changeText} ref={this.addMes}></textarea>
            <div>
-           <button>Add post</button>
+           <button onClick={this.addText}>Add post</button>
              </div>
 
         </div>

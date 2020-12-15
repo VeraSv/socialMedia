@@ -14,16 +14,35 @@ class Dialogs extends React.PureComponent {
   {id:1, name:'Slava'}, {id:2, name:'Anna'}, {id:3, name:'Vasja'},{id:4, name:'Sasha'}
 ];*/
 /*messagesData=[{id:1, message:'Hi'},{id:2, message:'How are you'},{id:3, message:'Have a good day!'}]*/
-  render (){
+newMes=null;
+addMes=(ref)=>{
+this.newMes=ref;
+}
+
+addMessage=()=>{
+alert(this.newMes.value)
+}
+
+render (){
   var user=this.props.userData.map(i=>{return <DialogItem key={i.id} id={i.id} name={i.name} />})
   var message=this.props.messagesData.map(i=>{return <Message key={i.id} id={i.id} message={i.message} img={i.img}/>});
-    return (
+ 
+  
+  
+  return (
     <div className='dialogs'>
       <div className='dialogs_items'>
         {user}
       </div>
           <div className='messages'>
            {message}
+           <div>
+           <textarea defaultValue=''  ref={this.addMes}></textarea>
+           <div>
+           <button onClick={this.addMessage}>Add post</button>
+             </div>
+
+        </div>
           </div>
      
     </div>);

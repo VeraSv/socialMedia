@@ -6949,9 +6949,21 @@ var MyPosts = function (_React$PureComponent) {
   _inherits(MyPosts, _React$PureComponent);
 
   function MyPosts() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, MyPosts);
 
-    return _possibleConstructorReturn(this, (MyPosts.__proto__ || Object.getPrototypeOf(MyPosts)).apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = MyPosts.__proto__ || Object.getPrototypeOf(MyPosts)).call.apply(_ref, [this].concat(args))), _this), _this.newText = null, _this.addMes = function (ref) {
+      _this.newText = ref;
+    }, _this.changeText = function () {}, _this.addText = function () {
+      alert(_this.newText.value);
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
   _createClass(MyPosts, [{
@@ -6967,13 +6979,13 @@ var MyPosts = function (_React$PureComponent) {
         _react2.default.createElement(
           'div',
           null,
-          _react2.default.createElement('textarea', null),
+          _react2.default.createElement('textarea', { defaultValue: '', onChange: this.changeText, ref: this.addMes }),
           _react2.default.createElement(
             'div',
             null,
             _react2.default.createElement(
               'button',
-              null,
+              { onClick: this.addText },
               'Add post'
             )
           )
@@ -33773,18 +33785,30 @@ var Dialogs = function (_React$PureComponent) {
   _inherits(Dialogs, _React$PureComponent);
 
   function Dialogs() {
+    var _ref;
+
+    var _temp, _this, _ret;
+
     _classCallCheck(this, Dialogs);
 
-    return _possibleConstructorReturn(this, (Dialogs.__proto__ || Object.getPrototypeOf(Dialogs)).apply(this, arguments));
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = Dialogs.__proto__ || Object.getPrototypeOf(Dialogs)).call.apply(_ref, [this].concat(args))), _this), _this.newMes = null, _this.addMes = function (ref) {
+      _this.newMes = ref;
+    }, _this.addMessage = function () {
+      alert(_this.newMes.value);
+    }, _temp), _possibleConstructorReturn(_this, _ret);
   }
+  /*userData= [
+    {id:1, name:'Slava'}, {id:2, name:'Anna'}, {id:3, name:'Vasja'},{id:4, name:'Sasha'}
+  ];*/
+  /*messagesData=[{id:1, message:'Hi'},{id:2, message:'How are you'},{id:3, message:'Have a good day!'}]*/
+
 
   _createClass(Dialogs, [{
     key: 'render',
-
-    /*userData= [
-      {id:1, name:'Slava'}, {id:2, name:'Anna'}, {id:3, name:'Vasja'},{id:4, name:'Sasha'}
-    ];*/
-    /*messagesData=[{id:1, message:'Hi'},{id:2, message:'How are you'},{id:3, message:'Have a good day!'}]*/
     value: function render() {
       var user = this.props.userData.map(function (i) {
         return _react2.default.createElement(_DialogItem2.default, { key: i.id, id: i.id, name: i.name });
@@ -33792,6 +33816,7 @@ var Dialogs = function (_React$PureComponent) {
       var message = this.props.messagesData.map(function (i) {
         return _react2.default.createElement(_Message2.default, { key: i.id, id: i.id, message: i.message, img: i.img });
       });
+
       return _react2.default.createElement(
         'div',
         { className: 'dialogs' },
@@ -33803,7 +33828,21 @@ var Dialogs = function (_React$PureComponent) {
         _react2.default.createElement(
           'div',
           { className: 'messages' },
-          message
+          message,
+          _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement('textarea', { defaultValue: '', ref: this.addMes }),
+            _react2.default.createElement(
+              'div',
+              null,
+              _react2.default.createElement(
+                'button',
+                { onClick: this.addMessage },
+                'Add post'
+              )
+            )
+          )
         )
       );
     }
