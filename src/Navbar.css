@@ -1,0 +1,30 @@
+.nav {
+    grid-area:n;
+    background-color: #6A5ACD;
+    }
+.item {
+    color: white;
+    line-height: 30px;
+}
+.active {
+    color: yellow;
+}
+
+a {
+    color:white;
+}
+.friend {
+    display: inline-block;
+    margin-right: 10px;
+}
+.friend span {
+    display: block;
+}
+.friend img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.friends {
+    margin-top: 30px;
+}
