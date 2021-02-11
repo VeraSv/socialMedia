@@ -16,17 +16,14 @@ class Dialogs extends React.PureComponent {
   }
 
 
-newMes=null;
-addMes=(ref)=>{
-this.newMes=ref;
-}
+newMes=React.createRef();
 
 addMessage=()=>{
 
 this.props.addMessage();
 }
 onNewMessageChange=()=>{
- let text= this.newMes.value;
+ let text= this.newMes.current.value;
 this.props.messageChange(text);
 }
 
@@ -44,7 +41,7 @@ render (){
           <div className='messages'>
            {message }
            <div className='addMess'>
-           <textarea defaultValue ={this.props.messagesData.newMessageBody}  ref={this.addMes} onChange={this.onNewMessageChange}></textarea>
+           <textarea value ={this.props.messagesData.newMessageBody}  ref={this.newMes} onChange={this.onNewMessageChange}></textarea>
            <div>
            <button onClick={this.addMessage}>Add post</button>
              </div>

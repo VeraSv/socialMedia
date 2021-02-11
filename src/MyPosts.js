@@ -11,18 +11,15 @@ class MyPosts extends React.PureComponent {
  static propsTypes={
   updateNewPostText:PropTypes.object,
   addPost:PropTypes.func,
-  postData:PropTypes.array
-   
+  data:PropTypes.array,
+   newPostText:PropTypes.string
     
   }
 
-  newText=null;
+  newText=React.createRef();
 
-  addMes=(ref)=>{
-this.newText=ref;
-  }
-changeText=()=>{
-  let text=this.newText.value;
+ changeText=()=>{
+  let text=this.newText.current.value;
   this.props.updateNewPostText(text);
   
 }
@@ -33,12 +30,12 @@ addText=()=>{
 }
 
   render (){
-    var post=this.props.postData.data.map(i=><Post key={i.id} message={i.message} likesCount={i.likesCount} />)
+    var post=this.props.data.map(i=><Post key={i.id} message={i.message} likesCount={i.likesCount} />)
     return (
       <div className='myPost'>
       
        <div>
-           <textarea defaultValue={this.props.postData.newPostText} onChange={this.changeText} ref={this.addMes}></textarea>
+           <textarea value={this.props.newPostText} onChange={this.changeText} ref={this.newText}></textarea>
            <div>
            <button onClick={this.addText}>Add post</button>
              </div>

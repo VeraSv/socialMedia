@@ -13,7 +13,8 @@ import {connect} from 'react-redux';
 
 let mapStateToProps =(state)=>{
   return {
-    postData:state.postData
+    data:state.postData.data,
+    newPostText:state.postData.newPostText
   }
   }
   
