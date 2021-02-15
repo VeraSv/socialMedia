@@ -7,6 +7,7 @@ import Header from './Header';
 import Navbar from './Navbar';
 import Profile from './Profile';
 import DialogsContainer from './DialogsContainer';
+import UsersContainer from './UsersContainer';
 
 
 class Page extends React.PureComponent {
@@ -24,8 +25,8 @@ class Page extends React.PureComponent {
         <div className='content'>
           <Route path='/' exact component={()=><Profile  />}/>
           <Route path='/dialogs' component={()=> <DialogsContainer   />}/>
-          
-        </div>
+          <Route path='/users' component={()=> <UsersContainer />} />
+         </div>
        
       </div>
      </BrowserRouter>
