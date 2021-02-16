@@ -17,6 +17,9 @@ class Navbar extends React.PureComponent{
             <NavLink to='/dialogs' activeClassName='active'>Messages</NavLink>
           </div>
           <div className='item'>
+            <NavLink to='/users' activeClassName='active'>Friends</NavLink>
+          </div>
+          <div className='item'>
             <NavLink to='/news' activeClassName='active'>News</NavLink>
           </div>
           <div className='item'>
