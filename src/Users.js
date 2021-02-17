@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './users.css'
+import './users.css';
+import * as axios from 'axios';
 
 class Users extends React.PureComponent {
     static propsTypes={
@@ -11,11 +12,10 @@ class Users extends React.PureComponent {
         }
         
     render (){
-        if(this.props.users.length==0) this.props.setUsers({users:[
-            {id:1, img:'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg', followed:true, fullName:"Dmitry", status:"Boss", location:{city:'Minsk', country:'Belarus'}},
-            {id:2, img:'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg', followed:false,fullName:"Sasha", status:"Boss", location:{city:'Brest', country:'Belarus'}}, 
-            {id:3, img:'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg', followed:true,fullName:"Sergej", status:"Boss", location:{city:'Vitebsk', country:'Belarus'}}]}
-         )
+        if(this.props.users.length==0){
+             axios.get("https://social-network.samuraijs.com/api/1.0/users").
+             then(responce =>{this.props.users=responce.data.items});
+         }
         return (
             <div>
                { this.props.users.map(u => { return (
