@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './users.css';
+
 import * as axios from 'axios';
 
 class Users extends React.PureComponent {
@@ -12,17 +13,21 @@ class Users extends React.PureComponent {
         }
         
     render (){
-        if(this.props.users.length==0){
-             axios.get("https://social-network.samuraijs.com/api/1.0/users").
-             then(responce =>{this.props.users=responce.data.items});
-         }
+        let getUsers=()=>{
+            if(this.props.users.length==0){
+                axios.get("https://social-network.samuraijs.com/api/1.0/users").
+                then(responce =>{this.props.setUsersAc(responce.data.items)});
+            }
+        }
+        
         return (
             <div>
+                <button onClick={getUsers}>Get users</button>
                { this.props.users.map(u => { return (
                 <div key={u.id}>
                     <div>
                         <div>
-                            <img src={u.img}/>
+                            <img src={u.photos.small ? u.photos.small: 'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg' }/>
                         </div>
                         <div>
                            {u.followed? <button onClick={()=>this.props.unfollowed(u.id)}>Unfollow</button>: <button onClick={()=>this.props.followed(u.id)}>Follow</button>}
@@ -30,12 +35,12 @@ class Users extends React.PureComponent {
                     </div>
                     <div>
                         <div>
-                        <span>{u.fullName}</span>
-                        <span>{u.status}</span>
+                        <span>{u.name}</span>
+                        <span>{u.status? u.status:' boss'}</span>
                         </div>
                         <div>
-                        <span>{u.location.city}</span>
-                        <span>{u.location.country}</span>
+                        <span>city</span>
+                        <span> country</span>
                         </div>
                     </div>
                 </div> )})}
