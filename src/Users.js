@@ -11,19 +11,16 @@ class Users extends React.PureComponent {
         unfollowed:PropTypes.func,
         setUsersAc:PropTypes.func
         }
-        
-    render (){
-        let getUsers=()=>{
-            if(this.props.users.length==0){
-                axios.get("https://social-network.samuraijs.com/api/1.0/users").
-                then(responce =>{this.props.setUsersAc(responce.data.items)});
-            }
+        componentDidMount(){
+            axios.get("https://social-network.samuraijs.com/api/1.0/users").
+            then(responce =>{this.props.setUsersAc(responce.data.items)});
         }
+    render (){
+        
         
         return (
             <div>
-                <button onClick={getUsers}>Get users</button>
-               { this.props.users.map(u => { return (
+                { this.props.users.map(u => { return (
                 <div key={u.id}>
                     <div>
                         <div>
