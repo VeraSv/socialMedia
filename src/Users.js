@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import './users.css';
 
@@ -12,35 +12,53 @@ class Users extends React.PureComponent {
         setUsersAc:PropTypes.func
         }
         componentDidMount(){
-            axios.get("https://social-network.samuraijs.com/api/1.0/users").
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).
             then(responce =>{this.props.setUsersAc(responce.data.items)});
         }
+        onPageChanged=(p)=>{this.props.setCurrentPage(p);
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`).
+            then(responce =>{
+                this.props.setUsersAc(responce.data.items);
+                //this.props.setTotalUsersCount(responce.data.totalCount)
+            });};
+         
     render (){
+       
+        let pagesCount=Math.ceil(this.props.totalUsersCount/this.props.pageSize);
+        let pages= [];
+        for (let i=1;i<=pagesCount; i++ ) {
+            pages.push(i)
+        }
         
-        
+         
         return (
             <div>
-                { this.props.users.map(u => { return (
-                <div key={u.id}>
+                <div>
+                    {pages.map(p => {return (<span className={this.props.currentPage==p?'selectedPage':'page'} onClick={()=>this.onPageChanged(p)} key={p}>{' '+p+' '}</span>)})}
+                    
+                </div>
+
+                {this.props.users.map(u => { return (
+            <div key={u.id}>
+                <div>
                     <div>
-                        <div>
-                            <img src={u.photos.small ? u.photos.small: 'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg' }/>
-                        </div>
-                        <div>
-                           {u.followed? <button onClick={()=>this.props.unfollowed(u.id)}>Unfollow</button>: <button onClick={()=>this.props.followed(u.id)}>Follow</button>}
-                        </div>
+                        <img src={u.photos.small ? u.photos.small: 'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg' }/>
                     </div>
                     <div>
-                        <div>
-                        <span>{u.name}</span>
-                        <span>{u.status? u.status:' boss'}</span>
-                        </div>
-                        <div>
-                        <span>city</span>
-                        <span> country</span>
-                        </div>
+                       {u.followed? <button onClick={()=>this.props.unfollowed(u.id)}>Unfollow</button>: <button onClick={()=>this.props.followed(u.id)}>Follow</button>}
                     </div>
-                </div> )})}
+                </div>
+                <div>
+                    <div>
+                    <span>{u.name}</span>
+                    <span>{u.status? u.status:' boss'}</span>
+                    </div>
+                    <div>
+                    <span>city</span>
+                    <span> country</span>
+                    </div>
+                </div>
+            </div> )}) }
             </div>
         );
         }
