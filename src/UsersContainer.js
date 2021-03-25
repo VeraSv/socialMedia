@@ -5,11 +5,12 @@ import PropTypes from 'prop-types';
 import Users from './Users';
 //import {events} from './events';
 import {connect} from 'react-redux';
-import { followActionCreator } from './users-reducer';
-import { unfollowActionCreator } from './users-reducer';
+import { followed, setIsFetching} from './users-reducer';
+import { unfollowed} from './users-reducer';
 import { setUsersAc} from './users-reducer';
-import {setCurrentPageAC} from './users-reducer';
-import {setUsersTotalCountAC} from './users-reducer'
+import {setCurrentPage} from './users-reducer';
+import {setTotalUsersCount} from './users-reducer'
+
 
 
 let mapStateToProps =(state)=>{
@@ -18,24 +19,13 @@ let mapStateToProps =(state)=>{
     pageSize:state.usersPage.pageSize,
     totalUsersCount:state.usersPage.totalUsersCount,
     currentPage:state.usersPage.currentPage,
+    isFetching:state.usersPage.isFetching
    
   }
   }
   
-  let mapDispatchToProps =(dispatch)=>{
-  return {
-    followed:(userId)=>{dispatch(followActionCreator(userId))},
-    unfollowed:(userId)=>{dispatch(unfollowActionCreator(userId))},
-    setUsersAc: (users)=>{dispatch(setUsersAc(users))},
-    setCurrentPage:(pageNumber)=>{dispatch(setCurrentPageAC(pageNumber))},
-    setTotalUsersCount:(totalCount)=>{
-      dispatch(setUsersTotalCountAC(totalCount))
-    }
-  }
-  }
 
-const UsersContainer = connect(mapStateToProps ,mapDispatchToProps)(Users);
-
-
+const UsersContainer = connect(mapStateToProps ,
+  {followed, unfollowed, setUsersAc, setCurrentPage, setTotalUsersCount, setIsFetching})(Users);
 
 export default UsersContainer;

@@ -2,15 +2,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import  './MyPosts.css';
-import {addPostActionCreator} from './profile-reducer';
-import {updateNewPostTextActionCreator}  from './profile-reducer';
-//import {events} from './events';
 import Post from './Post';
 
 class MyPosts extends React.PureComponent {
  static propsTypes={
-  updateNewPostText:PropTypes.object,
-  addPost:PropTypes.func,
+  updateNewPostTextAC:PropTypes.object,
+  addPostAC:PropTypes.func,
   data:PropTypes.array,
    newPostText:PropTypes.string
     
@@ -20,12 +17,12 @@ class MyPosts extends React.PureComponent {
 
  changeText=()=>{
   let text=this.newText.current.value;
-  this.props.updateNewPostText(text);
+  this.props.updateNewPostTextAC(text);
   
 }
 addText=()=>{
   
-  this.props.addPost();
+  this.props.addPostAC();
 
 }
 

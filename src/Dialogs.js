@@ -4,8 +4,6 @@ import  './Dialogs.css'
 //import {events} from './events';
 import DialogItem from './DialogItem';
 import Message from './Message';
-import {sendMessageCreator} from './dialogs-reducer';
-import {updateNewMessageBodyCreator} from './dialogs-reducer';
 
 class Dialogs extends React.PureComponent {
   static propTypes={
@@ -22,6 +20,7 @@ addMessage=()=>{
 
 this.props.addMessage();
 }
+
 onNewMessageChange=()=>{
  let text= this.newMes.current.value;
 this.props.messageChange(text);

@@ -3,6 +3,7 @@ const unfollow='unfollow';
 const set_users='set_users';
 const set_current_Page='set_current_Page';
 const set_totalUsersCount='set_totalUsersCount'
+const toggle_is_fetching = 'toggle_is_fetching'
 
 let initialState = {users:[/*
     {id:1, img:'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg', followed:true, fullName:"Dmitry", status:"Boss", location:{city:'Minsk', country:'Belarus'}},
@@ -12,7 +13,8 @@ setUsers:(data)=>{this.users=data},
 pageSize:5,
 totalUsersCount:100,
 currentPage:1,
-setCurrentPage:(data)=>{this.currentPage=data}}
+setCurrentPage:(data)=>{this.currentPage=data},
+isFetching: true}
  
     const usersReducer =(state=initialState, action) => {
 
@@ -36,22 +38,25 @@ setCurrentPage:(data)=>{this.currentPage=data}}
                  return {...state, currentPage:action.currentPage };
         case set_totalUsersCount:
             return {...state, totalUsersCount: action.count}
-        default: 
+        case toggle_is_fetching:
+            return {...state, isFetching: action.isFetching}
+            default: 
    return state;
 }
 }
 
 export default usersReducer
 
-export const followActionCreator= (userId)=> {
+export const followed= (userId)=> {
     return {type:follow, userId};
     
 }
-export const unfollowActionCreator =(userId)=>{
+export const unfollowed =(userId)=>{
 return { type:unfollow, userId};
 }
 export const setUsersAc =(users)=>{
 return {type:set_users, users}
 }
-export const setCurrentPageAC=(currentPage)=>({type:set_current_Page, currentPage});
-export const setUsersTotalCountAC=(totalUsersCount)=>({type:set_totalUsersCount, count: totalUsersCount})
+export const setCurrentPage=(currentPage)=>({type:set_current_Page, currentPage});
+export const setTotalUsersCount=(totalUsersCount)=>({type:set_totalUsersCount, count: totalUsersCount})
+export const setIsFetching =(isFetching)=>({type:toggle_is_fetching, isFetching})

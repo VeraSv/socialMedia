@@ -22,9 +22,9 @@ return state;
 export default dialogsReducer
 
 
-export const sendMessageCreator=()=>{
+export const addMessage =()=>{
     return {type:sendMessage}
 };
-export const updateNewMessageBodyCreator =(text)=> {
+export const  messageChange=(text)=> {
     return  {type:updateNewMessageBody, newText:text};
 }

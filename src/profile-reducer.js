@@ -21,10 +21,10 @@ let initialState = {data:[{id:1, message:"Hi!", likesCount:"5"}, {id:2, message:
 
 export default profileReducer
 
-export const addPostActionCreator= ()=> {
+export const addPostAC= ()=> {
     return {type:addPost};
     
 }
-export const updateNewPostTextActionCreator =(text)=>{
+export const updateNewPostTextAC=(text)=>{
 return { type:updateNewPostText, newText:text};
 }

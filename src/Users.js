@@ -1,6 +1,8 @@
-import React, { useCallback } from 'react';
+import React, { Fragment, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import './users.css';
+import UserPresentation from './UserPresentation';
+import spinner from './spinner.gif';
 
 import * as axios from 'axios';
 
@@ -12,54 +14,35 @@ class Users extends React.PureComponent {
         setUsersAc:PropTypes.func
         }
         componentDidMount(){
+            this.props.setIsFetching(true)
             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).
-            then(responce =>{this.props.setUsersAc(responce.data.items)});
+            then(responce =>{
+                this.props.setIsFetching(false)
+                this.props.setUsersAc(responce.data.items)});
         }
         onPageChanged=(p)=>{this.props.setCurrentPage(p);
+            this.props.setIsFetching(true)
             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`).
             then(responce =>{
+                this.props.setIsFetching(false)
                 this.props.setUsersAc(responce.data.items);
                 //this.props.setTotalUsersCount(responce.data.totalCount)
             });};
          
-    render (){
-       
-        let pagesCount=Math.ceil(this.props.totalUsersCount/this.props.pageSize);
-        let pages= [];
-        for (let i=1;i<=pagesCount; i++ ) {
-            pages.push(i)
-        }
-        
+    render (){     
          
         return (
-            <div>
-                <div>
-                    {pages.map(p => {return (<span className={this.props.currentPage==p?'selectedPage':'page'} onClick={()=>this.onPageChanged(p)} key={p}>{' '+p+' '}</span>)})}
-                    
-                </div>
-
-                {this.props.users.map(u => { return (
-            <div key={u.id}>
-                <div>
-                    <div>
-                        <img src={u.photos.small ? u.photos.small: 'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg' }/>
-                    </div>
-                    <div>
-                       {u.followed? <button onClick={()=>this.props.unfollowed(u.id)}>Unfollow</button>: <button onClick={()=>this.props.followed(u.id)}>Follow</button>}
-                    </div>
-                </div>
-                <div>
-                    <div>
-                    <span>{u.name}</span>
-                    <span>{u.status? u.status:' boss'}</span>
-                    </div>
-                    <div>
-                    <span>city</span>
-                    <span> country</span>
-                    </div>
-                </div>
-            </div> )}) }
-            </div>
+        <Fragment>
+        {this.props.isFetching ? <img src='https://icons8.com/preloaders/preloaders/1474/Walk.gif'/>:null}
+           <UserPresentation users={this.props.users}
+            followed={this.props.followed}
+            unfollowed={this.props.unfollowed}
+            setUsersAc={this.props.setUsersAc}
+            totalUsersCount={this.props.totalUsersCount}
+            pageSize={this.props.pageSize}
+             currentPage={this.props.currentPage}
+            onPageChanged={this.onPageChanged}  />
+            </Fragment>
         );
         }
     }
