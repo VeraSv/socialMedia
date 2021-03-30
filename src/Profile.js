@@ -14,7 +14,7 @@ class Profile extends React.PureComponent {
        render(){
     
           return(   <div >
-         <ProfileInfo />
+         <ProfileInfo profile={this.props.profile}/>
            <MyPostsContainer  />
            
           </div>)

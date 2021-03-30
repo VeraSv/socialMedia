@@ -11,7 +11,7 @@ class Navbar extends React.PureComponent{
         
           return(   <nav className='nav'>
           <div className='item'>
-            <NavLink to='/' exact activeClassName='active'>Profile</NavLink>
+            <NavLink to='/profile' exact activeClassName='active'>Profile</NavLink>
           </div>
           <div className='item'>
             <NavLink to='/dialogs' activeClassName='active'>Messages</NavLink>

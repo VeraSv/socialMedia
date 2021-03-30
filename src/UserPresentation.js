@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import './users.css';
-
+import { NavLink } from 'react-router-dom';
 import * as axios from 'axios';
 
 let UserPresentation=(props)=> {
@@ -30,7 +30,9 @@ let UserPresentation=(props)=> {
             <div key={u.id}>
                 <div>
                     <div>
+                        <NavLink to= {'/profile/'+u.id}>
                         <img src={u.photos.small ? u.photos.small: 'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg' }/>
+                        </NavLink>
                     </div>
                     <div>
                        {u.followed? <button onClick={()=>props.unfollowed(u.id)}>Unfollow</button>: <button onClick={()=>props.followed(u.id)}>Follow</button>}

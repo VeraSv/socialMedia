@@ -1,7 +1,8 @@
 const addPost='addPost';
 const updateNewPostText='updateNewPostText';
+const set_User_Profile='set_User_Profile'
 
-let initialState = {data:[{id:1, message:"Hi!", likesCount:"5"}, {id:2, message:"How are you?", likesCount:"0"}], newPostText:''};
+let initialState = {data:[{id:1, message:"Hi!", likesCount:"5"}, {id:2, message:"How are you?", likesCount:"0"}], newPostText:'', profile:null};
  const profileReducer =(state=initialState, action) => {
 
     switch (action.type) {
@@ -13,7 +14,8 @@ let initialState = {data:[{id:1, message:"Hi!", likesCount:"5"}, {id:2, message:
 
         case updateNewPostText:
            return {...state, newPostText:action.newText};
-        
+        case set_User_Profile:
+            return {...state, profile:action.profile}
         default: 
    return state;
 }
@@ -27,4 +29,7 @@ export const addPostAC= ()=> {
 }
 export const updateNewPostTextAC=(text)=>{
 return { type:updateNewPostText, newText:text};
+}
+export const setUserProfile =(profile)=>{
+    return {type:set_User_Profile, profile}
 }
