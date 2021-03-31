@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {BrowserRouter, Route} from 'react-router-dom'; 
 import  './Page.css'
 
-import Header from './Header';
+import HeaderContainer from './HeaderContainer';
 import Navbar from './Navbar';
 import ProfileContainer from './ProfileContainer';
 import DialogsContainer from './DialogsContainer';
@@ -20,7 +20,7 @@ class Page extends React.PureComponent {
     return (
      <BrowserRouter>
       <div className='app-wrapper'>
-      <Header />
+      <HeaderContainer />
         <Navbar/>
         <div className='content'>
           
