@@ -1,7 +1,7 @@
 import React, { Fragment, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import './users.css';
-
+import {userApi} from './API'
 import UserPresentation from './UserPresentation';
 import spinner from './spinner.gif';
 
@@ -12,21 +12,27 @@ class Users extends React.PureComponent {
         users:PropTypes.array,
         followed:PropTypes.func,
         unfollowed:PropTypes.func,
-        setUsersAc:PropTypes.func
+        setUsersAc:PropTypes.func,
+        toggleFollowingProgress:PropTypes.func,
+        getUsersThunkCreator:PropTypes.func
         }
         componentDidMount(){
-            this.props.setIsFetching(true)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).
+           this.props.getUsersThunkCreator(this.props.currentPage,this.props.pageSize)
+           /* this.props.setIsFetching(true)
+            userApi.getUsers(this.props.currentPage,this.props.pageSize).
             then(responce =>{
                 this.props.setIsFetching(false)
-                this.props.setUsersAc(responce.data.items)});
-        }
+                this.props.setUsersAc(responce.items)});*/
+               
+}
+
+        
         onPageChanged=(p)=>{this.props.setCurrentPage(p);
             this.props.setIsFetching(true)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`).
+            userApi.getUsers(p,this.props.pageSize).
             then(responce =>{
                 this.props.setIsFetching(false)
-                this.props.setUsersAc(responce.data.items);
+                this.props.setUsersAc(responce.items);
                 //this.props.setTotalUsersCount(responce.data.totalCount)
             });};
          
@@ -42,7 +48,9 @@ class Users extends React.PureComponent {
             totalUsersCount={this.props.totalUsersCount}
             pageSize={this.props.pageSize}
              currentPage={this.props.currentPage}
-            onPageChanged={this.onPageChanged}  />
+            onPageChanged={this.onPageChanged} 
+            followingProgress={this.props.followingProgress}
+            toggleFollowingProgress={this.props.toggleFollowingProgress} />
             </Fragment>
         );
         }

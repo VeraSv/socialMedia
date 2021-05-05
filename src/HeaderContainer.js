@@ -10,15 +10,16 @@ import { connect } from 'react-redux';
 import {setUserProfile} from './profile-reducer' 
 import Header from './Header'
 import {setUserData} from './auth_reducer'
+import { userApi } from './API';
 
 class HeaderContainer extends React.PureComponent {
    componentDidMount () {
    
     
-       axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {withCredentials:true}).
+       userApi.getAuth().
        then(responce =>{
-           if(responce.data.resultCode==0) {
-            let {id,email,login}=responce.data.data   
+           if(responce.resultCode==0) {
+            let {id,email,login}=responce.data   
             this.props.setUserData(id,email,login)}
           });
    }

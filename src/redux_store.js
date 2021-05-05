@@ -1,11 +1,12 @@
 'use strict';
 
-import {createStore} from 'redux';
+import {applyMiddleware, createStore} from 'redux';
 import {combineReducers} from 'redux';
 import profileReducer from './profile-reducer';
 import dialogsReducer from './dialogs-reducer';
 import usersReducer from './users-reducer';
-import authReducer from './auth_reducer'
+import authReducer from './auth_reducer';
+import thunk from 'redux-thunk';
 
 let reducers = combineReducers ({
     postData:profileReducer,
@@ -13,6 +14,6 @@ let reducers = combineReducers ({
     usersPage:usersReducer,
     auth:authReducer
 });
-let store= createStore(reducers);
+let store= createStore(reducers, applyMiddleware(thunk));
 
 export default store;

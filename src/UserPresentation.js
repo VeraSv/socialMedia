@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './users.css';
 import { NavLink } from 'react-router-dom';
 import * as axios from 'axios';
+import { userApi } from './API';
 
 let UserPresentation=(props)=> {
     
@@ -35,7 +36,13 @@ let UserPresentation=(props)=> {
                         </NavLink>
                     </div>
                     <div>
-                       {u.followed? <button onClick={()=>props.unfollowed(u.id)}>Unfollow</button>: <button onClick={()=>props.followed(u.id)}>Follow</button>}
+                       {u.followed? <button disabled={props.followingProgress.some(id=>id===u.id)} onClick={()=>{ props.toggleFollowingProgress(true,u.id);
+                        userApi.delete(u.id).
+                        then(responce =>{if (responce.resultCode==0) {props.unfollowed(u.id); }props.toggleFollowingProgress(false,u.id)});}                          
+                           }>Unfollow</button>
+                       : <button disabled={props.followingProgress.some(id=>id===u.id)} onClick={()=>{props.toggleFollowingProgress(true,u.id)
+                        userApi.post(u.id).
+                        then(responce =>{if (responce.resultCode==0) {props.followed(u.id)}props.toggleFollowingProgress(false,u.id)});}}>Follow</button>}
                     </div>
                 </div>
                 <div>
