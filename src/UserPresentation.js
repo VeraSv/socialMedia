@@ -4,7 +4,7 @@ import './users.css';
 import { NavLink } from 'react-router-dom';
 import * as axios from 'axios';
 import { userApi } from './API';
-
+import {unfollowThunk,followThunk} from './users-reducer'
 let UserPresentation=(props)=> {
     
     /*    componentDidMount(){
@@ -36,13 +36,11 @@ let UserPresentation=(props)=> {
                         </NavLink>
                     </div>
                     <div>
-                       {u.followed? <button disabled={props.followingProgress.some(id=>id===u.id)} onClick={()=>{ props.toggleFollowingProgress(true,u.id);
-                        userApi.delete(u.id).
-                        then(responce =>{if (responce.resultCode==0) {props.unfollowed(u.id); }props.toggleFollowingProgress(false,u.id)});}                          
+                       {u.followed? <button disabled={props.followingProgress.some(id=>id===u.id)} onClick={()=>{ 
+                           unfollowThunk(u.id)}                          
                            }>Unfollow</button>
-                       : <button disabled={props.followingProgress.some(id=>id===u.id)} onClick={()=>{props.toggleFollowingProgress(true,u.id)
-                        userApi.post(u.id).
-                        then(responce =>{if (responce.resultCode==0) {props.followed(u.id)}props.toggleFollowingProgress(false,u.id)});}}>Follow</button>}
+                       : <button disabled={props.followingProgress.some(id=>id===u.id)}
+                        onClick={()=>{followThunk(u.id)}}>Follow</button>}
                     </div>
                 </div>
                 <div>

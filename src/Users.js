@@ -28,13 +28,9 @@ class Users extends React.PureComponent {
 
         
         onPageChanged=(p)=>{this.props.setCurrentPage(p);
-            this.props.setIsFetching(true)
-            userApi.getUsers(p,this.props.pageSize).
-            then(responce =>{
-                this.props.setIsFetching(false)
-                this.props.setUsersAc(responce.items);
-                //this.props.setTotalUsersCount(responce.data.totalCount)
-            });};
+           
+            this.props.getUsersThunkCreator(p,this.props.pageSize)
+            ;};
          
     render (){     
          

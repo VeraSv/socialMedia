@@ -73,3 +73,16 @@ export const getUsersThunkCreator=(currentPage,pageSize) =>{
         dispatch(setIsFetching(false))
         dispatch(setUsersAc(responce.items))});
     }}
+    export const unfollowThunk=(id) =>{
+        return (dispatch)=>{dispatch(toggleFollowingProgress(true,id));
+            userApi.delete(id).
+            then(responce =>{if (responce.resultCode==0) {unfollowed(id); };
+             toggleFollowingProgress(false,id)});
+            
+            }}
+    export const followThunk=(id) =>{
+                return (dispatch)=>{dispatch(toggleFollowingProgress(true,id))
+                        userApi.post(id).
+                        then(responce =>{if (responce.resultCode==0) {followed(id)}
+                      toggleFollowingProgress(false,id)});
+                }}
