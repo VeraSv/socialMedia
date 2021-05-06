@@ -5,7 +5,8 @@ import PropTypes from 'prop-types';
 import Users from './Users';
 //import {events} from './events';
 import {connect} from 'react-redux';
-import { followed, setIsFetching, unfollowed,setUsersAc, setCurrentPage,setTotalUsersCount,toggleFollowingProgress, getUsersThunkCreator } from './users-reducer';
+import { followed, setIsFetching, unfollowed,setUsersAc, setCurrentPage,setTotalUsersCount,toggleFollowingProgress, getUsersThunkCreator,
+  unfollowThunk, followThunk } from './users-reducer';
 
 let mapStateToProps =(state)=>{
   return {
@@ -21,6 +22,7 @@ let mapStateToProps =(state)=>{
   
 
 const UsersContainer = connect(mapStateToProps ,
-  {followed, unfollowed, setUsersAc, setCurrentPage, setTotalUsersCount, setIsFetching, getUsersThunkCreator, toggleFollowingProgress})(Users);
+  {followed, unfollowed, setUsersAc, setCurrentPage, setTotalUsersCount, setIsFetching, getUsersThunkCreator, toggleFollowingProgress,
+    unfollowThunk, followThunk})(Users);
 
 export default UsersContainer;

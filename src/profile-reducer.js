@@ -1,3 +1,4 @@
+import {userApi} from './API'
 const addPost='addPost';
 const updateNewPostText='updateNewPostText';
 const set_User_Profile='set_User_Profile'
@@ -32,4 +33,10 @@ return { type:updateNewPostText, newText:text};
 }
 export const setUserProfile =(profile)=>{
     return {type:set_User_Profile, profile}
+}
+export const getUserProfile =(userId)=>(dispatch)=>{
+    userApi.getProfile(userId).
+      then(responce =>{
+        dispatch(setUserProfile(responce))
+         });
 }

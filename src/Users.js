@@ -46,7 +46,9 @@ class Users extends React.PureComponent {
              currentPage={this.props.currentPage}
             onPageChanged={this.onPageChanged} 
             followingProgress={this.props.followingProgress}
-            toggleFollowingProgress={this.props.toggleFollowingProgress} />
+            toggleFollowingProgress={this.props.toggleFollowingProgress} 
+            unfollowThunk={this.props.unfollowThunk}
+            followThunk={this.props.followThunk}/>
             </Fragment>
         );
         }

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import  './Dialogs.css'
-//import {events} from './events';
+import  './Dialogs.css';
 import DialogItem from './DialogItem';
 import Message from './Message';
 
@@ -9,26 +8,24 @@ class Dialogs extends React.PureComponent {
   static propTypes={
     userData:PropTypes.array,
     messagesData:PropTypes.object,
-   addMessage:PropTypes.func,
-   messageChange:PropTypes.func
+    addMessage:PropTypes.func,
+    messageChange:PropTypes.func
   }
 
+  newMes=React.createRef();
 
-newMes=React.createRef();
+  addMessage=()=>{
+    this.props.addMessage();
+  }
 
-addMessage=()=>{
+  onNewMessageChange=()=>{
+    let text= this.newMes.current.value;
+    this.props.messageChange(text);
+  }
 
-this.props.addMessage();
-}
-
-onNewMessageChange=()=>{
- let text= this.newMes.current.value;
-this.props.messageChange(text);
-}
-
-render (){
-  var user=this.props.userData.map(i=>{return <DialogItem  key={i.id} id={i.id} name={i.name} img={i.img}/>})
-  var message=this.props.messagesData.data.map(i=>{return <Message  key={i.id} id={i.id} message={i.message} />});
+  render (){
+    var user=this.props.userData.map(i=>{return <DialogItem  key={i.id} id={i.id} name={i.name} img={i.img}/>})
+    var message=this.props.messagesData.data.map(i=>{return <Message  key={i.id} id={i.id} message={i.message} />});
  
   
   
