@@ -26,5 +26,5 @@ export const getAuthUserData=()=>(dispatch)=>{
            if(responce.resultCode==0) {
             let {id,email,login}=responce.data   
             dispatch(setUserData(id,email,login))}
-          });
+        });
 }

@@ -1,11 +1,7 @@
-import React, { Fragment, useCallback } from 'react';
+import React, { Fragment} from 'react';
 import PropTypes from 'prop-types';
 import './users.css';
-import {userApi} from './API'
 import UserPresentation from './UserPresentation';
-import spinner from './spinner.gif';
-
-import * as axios from 'axios';
 
 class Users extends React.PureComponent {
     static propsTypes={
@@ -15,28 +11,20 @@ class Users extends React.PureComponent {
         setUsersAc:PropTypes.func,
         toggleFollowingProgress:PropTypes.func,
         getUsersThunkCreator:PropTypes.func
-        }
-        componentDidMount(){
-           this.props.getUsersThunkCreator(this.props.currentPage,this.props.pageSize)
-           /* this.props.setIsFetching(true)
-            userApi.getUsers(this.props.currentPage,this.props.pageSize).
-            then(responce =>{
-                this.props.setIsFetching(false)
-                this.props.setUsersAc(responce.items)});*/
-               
-}
-
-        
-        onPageChanged=(p)=>{this.props.setCurrentPage(p);
-           
-            this.props.getUsersThunkCreator(p,this.props.pageSize)
-            ;};
+    }
+    
+    componentDidMount(){
+        this.props.getUsersThunkCreator(this.props.currentPage,this.props.pageSize)         
+    }
+    
+    onPageChanged=(p)=>{this.props.setCurrentPage(p);
+        this.props.getUsersThunkCreator(p,this.props.pageSize);
+    };
          
     render (){     
-         
         return (
         <Fragment>
-        {this.props.isFetching ? <img src='https://icons8.com/preloaders/preloaders/1474/Walk.gif'/>:null}
+          {this.props.isFetching ? <img src='https://icons8.com/preloaders/preloaders/1474/Walk.gif'/>:null}
            <UserPresentation users={this.props.users}
             followed={this.props.followed}
             unfollowed={this.props.unfollowed}
@@ -49,8 +37,8 @@ class Users extends React.PureComponent {
             toggleFollowingProgress={this.props.toggleFollowingProgress} 
             unfollowThunk={this.props.unfollowThunk}
             followThunk={this.props.followThunk}/>
-            </Fragment>
-        );
-        }
+        </Fragment>
+       );
     }
-    export default Users;
+}
+export default Users;

@@ -1,4 +1,4 @@
-import {userApi} from './API'
+import {userApi} from '../API'
 const follow='follow';
 const unfollow='unfollow';
 const set_users='set_users';
@@ -18,49 +18,44 @@ currentPage:1,
 setCurrentPage:(data)=>{this.currentPage=data},
 isFetching: true,
 followingProgress:[]}
- 
-    const usersReducer =(state=initialState, action) => {
 
+const usersReducer =(state=initialState, action) => {
     switch (action.type) {
-      
-        case follow:
-                      
+      case follow:
         return {...state, users:state.users.map( u =>{
             if(u.id ===action.userId) {
                 return {...u, followed:true}
             } return u;})};
-
-        case unfollow:
-            return {...state, users:state.users.map( u =>{
-                if(u.id ===action.userId) {
-                    return {...u, followed:false}
-                } return u;})};
-        case set_users:
-             return {...state, users:[...action.users]};
-        case set_current_Page:
-                 return {...state, currentPage:action.currentPage };
-        case set_totalUsersCount:
-            return {...state, totalUsersCount: action.count}
-        case toggle_is_fetching:
-            return {...state, isFetching: action.isFetching}
-            case toggle_is_following_progress:
-                return {...state, followingProgress:action.isFetching?[...state.followingProgress, action.userId] :[...state.followingProgress.filter(id=> id!=action.userId)]}
-            default: 
-   return state;
-}
+      case unfollow:
+        return {...state, users:state.users.map( u =>{
+            if(u.id ===action.userId) {
+                return {...u, followed:false}
+            } return u;})};
+      case set_users:
+        return {...state, users:[...action.users]};
+      case set_current_Page:
+        return {...state, currentPage:action.currentPage };
+      case set_totalUsersCount:
+        return {...state, totalUsersCount: action.count}
+      case toggle_is_fetching:
+        return {...state, isFetching: action.isFetching}
+      case toggle_is_following_progress:
+        return {...state, followingProgress:action.isFetching?[...state.followingProgress, action.userId] :[...state.followingProgress.filter(id=> id!=action.userId)]}
+      default: 
+        return state;
+    }
 }
 
 export default usersReducer
 
 export const followed= (userId)=> {
-    return {type:follow, userId};
-    
+    return {type:follow, userId};   
 }
 export const unfollowed =(userId)=>{
-return { type:unfollow, userId};
+    return { type:unfollow, userId};
 }
 export const setUsersAc =(users)=>{
-return {type:set_users, users}
+    return {type:set_users, users}
 }
 export const setCurrentPage=(currentPage)=>({type:set_current_Page, currentPage});
 export const setTotalUsersCount=(totalUsersCount)=>({type:set_totalUsersCount, count: totalUsersCount})
@@ -72,17 +67,19 @@ export const getUsersThunkCreator=(currentPage,pageSize) =>{
     then(responce =>{
         dispatch(setIsFetching(false))
         dispatch(setUsersAc(responce.items))});
-    }}
-    export const unfollowThunk=(id) =>{
-        return (dispatch)=>{dispatch(toggleFollowingProgress(true,id));
-            userApi.delete(id).
-            then(responce =>{if (responce.resultCode==0) {unfollowed(id); };
-             toggleFollowingProgress(false,id)});
-            
-            }}
-    export const followThunk=(id) =>{
-                return (dispatch)=>{dispatch(toggleFollowingProgress(true,id))
-                        userApi.post(id).
-                        then(responce =>{if (responce.resultCode==0) {followed(id)}
-                      toggleFollowingProgress(false,id)});
-                }}
+    }
+}
+export const unfollowThunk=(id) =>{
+    return (dispatch)=>{dispatch(toggleFollowingProgress(true,id));
+        userApi.delete(id).
+        then(responce =>{if (responce.resultCode==0) {unfollowed(id); };
+        toggleFollowingProgress(false,id)});
+    }
+}
+export const followThunk=(id) =>{
+    return (dispatch)=>{dispatch(toggleFollowingProgress(true,id))
+        userApi.post(id).
+        then(responce =>{if (responce.resultCode==0) {followed(id)}
+        toggleFollowingProgress(false,id)});
+    }
+}
