@@ -2,7 +2,8 @@ import Users from './Users';
 import {connect} from 'react-redux';
 import { followed, setIsFetching, unfollowed,setUsersAc, setCurrentPage,setTotalUsersCount,toggleFollowingProgress, getUsersThunkCreator,
 unfollowThunk, followThunk } from './users-reducer';
-
+import {withAuthRedirect} from '../hoc/withAuthRedirect'
+import { compose } from 'redux';
 let mapStateToProps =(state)=>{
   return {
    users:state.usersPage.users,
@@ -14,8 +15,7 @@ let mapStateToProps =(state)=>{
   }
 }
 
-const UsersContainer = connect(mapStateToProps ,
-  {followed, unfollowed, setUsersAc, setCurrentPage, setTotalUsersCount, setIsFetching, getUsersThunkCreator, toggleFollowingProgress,
-  unfollowThunk, followThunk})(Users);
+  export default compose(withAuthRedirect,connect(mapStateToProps ,
+    {followed, unfollowed, setUsersAc, setCurrentPage, setTotalUsersCount, setIsFetching, getUsersThunkCreator, toggleFollowingProgress,
+    unfollowThunk, followThunk}))(Users)
 
-export default UsersContainer;
