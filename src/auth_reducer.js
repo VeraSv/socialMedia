@@ -28,3 +28,11 @@ export const getAuthUserData=()=>(dispatch)=>{
             dispatch(setUserData(id,email,login))}
         });
 }
+export const login=(email,password,rememberMe)=>(dispatch)=>{
+    userApi.getAuth().
+       then(responce =>{
+           if(responce.resultCode==0) {
+            let {id,email,login}=responce.data   
+            dispatch(setUserData(id,email,login))}
+        });
+}

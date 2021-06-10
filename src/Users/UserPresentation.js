@@ -13,14 +13,14 @@ let UserPresentation=(props)=> {
     return (
         <div>
             <div>
-                {pages.map(p => {return (<span className={props.currentPage==p?'selectedPage':'page'} onClick={()=>props.onPageChanged(p)} key={p}>{' '+p+' '}</span>)})}
+                {pages.map(p => {return (<span className={props.currentPage===p?'selectedPage':'page'} onClick={()=>props.onPageChanged(p)} key={p}>{' '+p+' '}</span>)})}
             </div>
             {props.users.map(u => { return (
             <div key={u.id}>
                 <div>
                     <div>
                         <NavLink to= {'/profile/'+u.id}>
-                        <img src={u.photos.small ? u.photos.small: 'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg' }/>
+                        <img alt='user' src={u.photos.small ? u.photos.small: 'https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg' }/>
                         </NavLink>
                     </div>
                     <div>

@@ -11,7 +11,13 @@ export const userApi ={
     getProfile(userId) { return instance.get(`profile/`+userId).then(responce=> {return responce.data})},
     getAuth(){return instance.get(`auth/me`).then(responce=> {return responce.data})},
     delete(id){return instance.delete(`follow/${id}`).then(responce=> {return responce.data})},
-    post(id){return instance.post(`follow/${id}`).then(responce=> {return responce.data})}
+    post(id){return instance.post(`follow/${id}`).then(responce=> {return responce.data})},
+    getStatus(userId) {
+        return instance.get('profile/status/' + userId)
+    },
+    updateStatus(status) {
+        return instance.put('profile/status'+{status})
+    }
 }
  
 

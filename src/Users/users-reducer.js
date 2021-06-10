@@ -40,7 +40,7 @@ const usersReducer =(state=initialState, action) => {
       case toggle_is_fetching:
         return {...state, isFetching: action.isFetching}
       case toggle_is_following_progress:
-        return {...state, followingProgress:action.isFetching?[...state.followingProgress, action.userId] :[...state.followingProgress.filter(id=> id!=action.userId)]}
+        return {...state, followingProgress:action.isFetching?[...state.followingProgress, action.userId] :[...state.followingProgress.filter(id=> id!==action.userId)]}
       default: 
         return state;
     }
@@ -72,14 +72,14 @@ export const getUsersThunkCreator=(currentPage,pageSize) =>{
 export const unfollowThunk=(id) =>{
     return (dispatch)=>{dispatch(toggleFollowingProgress(true,id));
         userApi.delete(id).
-        then(responce =>{if (responce.resultCode==0) {unfollowed(id); };
+        then(responce =>{if (responce.resultCode===0) {unfollowed(id); };
         toggleFollowingProgress(false,id)});
     }
 }
 export const followThunk=(id) =>{
     return (dispatch)=>{dispatch(toggleFollowingProgress(true,id))
         userApi.post(id).
-        then(responce =>{if (responce.resultCode==0) {followed(id)}
+        then(responce =>{if (responce.resultCode===0) {followed(id)}
         toggleFollowingProgress(false,id)});
     }
 }
