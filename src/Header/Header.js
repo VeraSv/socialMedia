@@ -9,7 +9,9 @@ class Header extends React.PureComponent {
       <header className='header'>
         <img src='https://i7.pngguru.com/preview/593/502/539/logo-canon-clip-art-icon-round-logo-design.jpg'/>
         <div className='login'>
-          {this.props.isAuth?this.props.login: <NavLink to='/login'>Login</NavLink>}
+          {this.props.isAuth
+          ?<div>{this.props.login}<button onClic={this.props.logout}> Log out</button></div>
+            : <NavLink to='/login'>Login</NavLink>}
         </div>
       </header>
     );
