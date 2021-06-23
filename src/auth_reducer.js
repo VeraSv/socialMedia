@@ -9,7 +9,7 @@ let initialState = {
   isAuth:false
 }
  
-const authReducer =(state=initialState, action) => {
+export const authReducer =(state=initialState, action) => {
     switch (action.type) {
         case set_user_data:
             return {...state, ...action.data}
@@ -18,7 +18,7 @@ const authReducer =(state=initialState, action) => {
     }
 }
 
-export default authReducer
+
 
 export const setUserData =(userId,email,login,isAuth)=>({
     type:set_user_data, data:{userId, email,login,isAuth}})
@@ -37,7 +37,8 @@ export const login=(email,password,rememberMe)=>(dispatch)=>{
         if(responce.resultCode==0) {
             dispatch(setUserData(null,null,null,false))
         } else {
-            dispatch(stopSubmit('loginForm', {'_error':'Error'}))
+            let message= responce.data.messages.length >0 ? responce.data.messages[0] :'Error'
+            dispatch(stopSubmit('loginForm', {'_error':message}))
         }
     })
 }

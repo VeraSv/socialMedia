@@ -15,7 +15,7 @@ setUsers:(data)=>{this.users=data},
 pageSize:5,
 totalUsersCount:100,
 currentPage:1,
-setCurrentPage:(data)=>{this.currentPage=data},
+setCurrentPage:(data)=>{this.getCurrentPage=data},
 isFetching: true,
 followingProgress:[]}
 

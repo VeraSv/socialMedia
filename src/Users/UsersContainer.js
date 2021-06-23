@@ -4,7 +4,8 @@ import { followed, setIsFetching, unfollowed,setUsersAc, setCurrentPage,setTotal
 unfollowThunk, followThunk } from './users-reducer';
 import {withAuthRedirect} from '../hoc/withAuthRedirect'
 import { compose } from 'redux';
-let mapStateToProps =(state)=>{
+import {getUsers, getPageSize, getTotalUsersCount, getCurrentPage, getIsFetching, getFollowingProgress} from './user-selectors'
+/*let mapStateToProps =(state)=>{
   return {
    users:state.usersPage.users,
     pageSize:state.usersPage.pageSize,
@@ -13,9 +14,20 @@ let mapStateToProps =(state)=>{
     isFetching:state.usersPage.isFetching,
     followingProgress:state.usersPage.followingProgress
   }
+}*/
+
+let mapStateToProps =(state)=>{
+  return {
+   users:getUsers(state),
+    pageSize:getPageSize(state),
+    totalUsersCount:getTotalUsersCount(state),
+    currentPage:getCurrentPage(state),
+    isFetching:getIsFetching(state),
+    followingProgress:getFollowingProgress(state)
+  }
 }
 
-  export default compose(withAuthRedirect,connect(mapStateToProps ,
+  export default compose(connect(mapStateToProps ,
     {followed, unfollowed, setUsersAc, setCurrentPage, setTotalUsersCount, setIsFetching, getUsersThunkCreator, toggleFollowingProgress,
     unfollowThunk, followThunk}))(Users)
 
